@@ -1,5 +1,18 @@
 <script setup lang="ts">
-let defaultUserImg: string = 'https://p3.music.126.net/YsWpOmNBMI2zWnqRs0X2bA==/18502581674220647.jpg?param=300y300'
+import { computed, ref } from 'vue';
+import { useStore, mapState } from 'vuex'
+
+const store = useStore();
+const storeStateFns = mapState(['userImg', 'username'])
+const storeState = {} as any
+Object.keys(storeStateFns).forEach(Fnkey => {
+  const fn = storeStateFns[Fnkey].bind({ $store: store })
+  storeState[Fnkey] = computed(fn)
+})
+const { userImg, username } = storeState
+
+const count = ref<number>(1)
+const double = computed(() => count.value * 2)
 </script>
 
 <template>
@@ -13,9 +26,9 @@ let defaultUserImg: string = 'https://p3.music.126.net/YsWpOmNBMI2zWnqRs0X2bA==/
     </div>
     <div class="user">
       <span class="user-img">
-        <img :src="defaultUserImg" alt="" class="img" />
+        <img :src="userImg" alt="" class="img" />
       </span>
-      <span class="user-name">沉默者的低语</span>
+      <span class="user-name">{{ username }}</span>
     </div>
     <div class="size">
       <span class="small" title="最小化">

@@ -6,6 +6,6 @@
   
 </template>
 
-<script scoped lang="scss">
+<style scoped lang="scss">
 
-</script>
+</style>

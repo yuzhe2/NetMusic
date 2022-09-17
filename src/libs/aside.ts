@@ -1,5 +1,5 @@
 export interface SongItem {
-  createTime: String,
-  title: String,
-  id: Number
+  createTime: string,
+  title: string,
+  id: number
 }

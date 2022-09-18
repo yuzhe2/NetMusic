@@ -1,21 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { SongItem } from '../../libs/aside'
+import { SheetItem } from '../../libs/aside'
 
-let sheetList: SongItem[] = [
-  {
-    title: '游戏用',
-    id: 7,
-    createTime: '2022-5-19 16:31:21'
-  },
-  {
-    title: 'clannad',
-    id: 8,
-    createTime: '2022-3-13 14:12:31'
-  }
-]
+defineProps<{
+  sheetList: SheetItem[]
+}>()
 
 let listShow = ref<boolean>(true)
+
+const emit = defineEmits(['changeSheet'])
+function handleChangeSheet (sheet: SheetItem | number) {
+  emit('changeSheet', sheet)
+}
 </script>
 
 <template>
@@ -24,11 +20,7 @@ let listShow = ref<boolean>(true)
       <span class="title" @click="listShow = !listShow">创建的歌单</span>
     </div>
     <ul class="list" v-show="listShow">
-      <li class="item">
-        <i class="iconfont icon-yinle"></i>
-        <span class="title">我喜欢的音乐</span>
-      </li>
-      <li v-for="item of sheetList" :key="item.id" class="item">
+      <li v-for="item of sheetList" :key="item.id" class="item" @click="handleChangeSheet(item)">
         <i class="iconfont icon-sousuo"></i>
         <span class="title">{{ item.title }}</span>
       </li>
@@ -40,7 +32,8 @@ let listShow = ref<boolean>(true)
 .aside {
   float: left;
   width: 200px;
-  padding: 0px 10px;
+  padding: 10px;
+  border: 1px solid #000;
   box-sizing: border-box;
   .title {
     padding-left: 10px;
@@ -58,6 +51,9 @@ let listShow = ref<boolean>(true)
         display: inline-block;
         margin-left: 5px;
       }
+    }
+    .item:hover {
+      background-color: rgba(51, 51, 51, 0.3);
     }
   }
 }

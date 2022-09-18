@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useStore, mapState } from 'vuex'
+import { ref } from 'vue';
 
-const store = useStore();
-const storeStateFns = mapState(['userImg', 'username'])
-const storeState = {} as any
-Object.keys(storeStateFns).forEach(Fnkey => {
-  const fn = storeStateFns[Fnkey].bind({ $store: store })
-  storeState[Fnkey] = computed(fn)
-})
-const { userImg, username } = storeState
+import { useState } from '../../utils/store'
+
+const { userImg, username } = useState(['username', 'userImg'])
 
 const count = ref<number>(1)
-const double = computed(() => count.value * 2)
 </script>
 
 <template>

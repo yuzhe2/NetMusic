@@ -27,6 +27,20 @@ const store = createStore<State>({
     // 更新播放的歌曲
     switchSong (state: State, song: SongItem) {
       state.song = song
+    },
+    // 更新正在播放的歌单
+    switchSheet (state: State, musicData: SongItem[]) {
+      state.list = musicData
+    },
+    // 根据指令s切换到下一首或者上一首
+    changeTypeSong (state: State, type: string) {
+      let idx = state.list.findIndex(val => val.url == state.song.url)
+      if (type === 'prev') {
+        idx = idx === 0 ? state.list.length - 1 : idx - 1
+      } else {
+        idx = idx === state.list.length - 1 ? 0 : idx + 1
+      }
+      state.song = state.list[idx]
     }
   }
 })

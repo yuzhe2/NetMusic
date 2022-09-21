@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { useState } from '../../utils/store'
 import { SongItem } from '../../libs/song'
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 import Process from '../../common/Process.vue'
+import Detail from '../Detail/index.vue'
 
 const song = useState(['song']).song as SongItem
 const music = ref<HTMLAudioElement>()
+const playState = ref<boolean>(false)
+const detailShow = ref<boolean>(false)
+const store = useStore()
 
 watch(song, () => {
   nextTick(() => {
     music.value?.play()
+    playState.value = true
   })
 })
 
@@ -25,7 +31,18 @@ function handleTimeChange () {
 const processNum = ref<number>(0)
 
 function playMusic () {
-  music.value?.play()
+  let state = music.value?.paused
+  if (state) {
+    music.value?.play()
+    playState.value = true
+  } else {
+    music.value?.pause()
+    playState.value = false
+  }
+}
+
+function handleFunc (type: string) {
+  store.commit('changeTypeSong', type)
 }
 
 nextTick(() => {
@@ -36,7 +53,7 @@ nextTick(() => {
 <template>
   <div class="footer">
     <div class="info">
-      <img :src="song.img" class="img" />
+      <img :src="song.img" class="img" @click="detailShow = true" />
       <div class="name">
         <span class="title">{{ song.title }}</span>
         <div class="singer">{{ song.singer }}</div>
@@ -44,9 +61,14 @@ nextTick(() => {
     </div>
     <div class="middle">
       <div class="control">
-        <span class="prev player-btn" title="上一首"></span>
-        <span class="play player-btn" title="播放" @click="playMusic"></span>
-        <span class="next player-btn" title="下一首"></span>
+        <span class="prev player-btn" title="上一首" @click="handleFunc('prev')"></span>
+        <span
+          class="play player-btn"
+          :class="playState ? 'playing' : ''"
+          title="播放"
+          @click="playMusic"
+        ></span>
+        <span class="next player-btn" title="下一首" @click="handleFunc('next')"></span>
       </div>
       <div class="process">
         <Process width="400px" :time="song.time" color="#f00" :process="processNum"></Process>
@@ -55,14 +77,26 @@ nextTick(() => {
     <div class="func"></div>
   </div>
   <audio :src="song.url" ref="music"></audio>
+  <Transition>
+    <Detail v-if="detailShow" @closeDetail="detailShow = false"></Detail>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
+.v-enter-active,
+.v-leave-active {
+  transition: top 0.25s linear;
+}
+
+.v-enter-from,
+.v-leave-to {
+  top: 100vh !important;
+}
 .footer {
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between  ;
+  justify-content: space-between;
   bottom: 0px;
   left: 0px;
   right: 0px;
@@ -74,6 +108,7 @@ nextTick(() => {
   .info {
     display: flex;
     align-items: center;
+    width: 120px;
     .img {
       width: 60px;
       border-radius: 4px;
@@ -81,9 +116,15 @@ nextTick(() => {
     }
     .name {
       .title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
         font-size: 16px;
       }
       .singer {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
         font-size: 14px;
       }
     }
@@ -100,6 +141,10 @@ nextTick(() => {
       .player-btn {
         display: inline-block;
         background-image: url(../../assets/img/player.png);
+      }
+
+      .player-btn.playing {
+        background-position: -30px 0;
       }
 
       .prev {

@@ -5,6 +5,10 @@ import Main from './views/Main/index.vue'
 import Footer from './views/Footer/index.vue'
 import { SheetItem } from './libs/aside'
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+
+import musicData from './utils/data'
+import { SongItem } from './libs/song'
 
 let sheetList: SheetItem[] = [
   {
@@ -24,9 +28,18 @@ let sheetList: SheetItem[] = [
   }
 ]
 
-let curSheet = ref<SheetItem>(sheetList[0])
+const store = useStore()
+store.commit('switchSheet', musicData[0].data)
+
+let curSheet = ref<SheetItem>(sheetList[0]),
+    curMusicData = ref<SongItem[]>(musicData[0].data)
 function handleChangeSheet (item: any) {
   curSheet.value = item
+  let id = curSheet.value.id,
+    curData = musicData.find(val => val.id === id)
+    
+  curMusicData.value = curData?.data as any
+  store.commit('switchSheet', curData?.data)
 }
 </script>
 
@@ -38,7 +51,7 @@ function handleChangeSheet (item: any) {
     <Aside @changeSheet="handleChangeSheet" :sheetList="sheetList"></Aside>
   </aside>
   <main>
-    <Main :sheet="curSheet"></Main>
+    <Main :sheet="curSheet" :musicData="curMusicData"></Main>
   </main>
   <footer>
     <Footer></Footer>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import SongItem from '../../components/song/SongItem.vue'
+import SongItemCom from '../../components/song/SongItem.vue'
 import { SheetItem } from '../../libs/aside'
-import { musicData } from '../../utils/data'
+import { SongItem  } from '../../libs/song'
 import { useState } from '../../utils/store'
 
 defineProps<{
-  sheet: SheetItem
+  sheet: SheetItem,
+  musicData: SongItem[]
 }>()
 
 const { username, userImg } = useState(['username', 'userImg'])
@@ -40,7 +41,7 @@ const { username, userImg } = useState(['username', 'userImg'])
         <span class="time" style="width: 100px;">时间</span>
       </div>
       <div class="list">
-        <SongItem
+        <SongItemCom
           :song="item"
           :key="index"
           v-for="(item, index) of musicData"
@@ -48,7 +49,7 @@ const { username, userImg } = useState(['username', 'userImg'])
           <template v-slot:prefix>
             <span style="width: 40px;">{{ index }}</span>
           </template>
-        </SongItem>
+        </SongItemCom>
       </div>
     </div>  
   </div>

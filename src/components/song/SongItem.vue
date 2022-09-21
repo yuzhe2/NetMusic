@@ -39,6 +39,12 @@ function switchMusic (song: SongItem) {
     padding: 0px 4px;
     box-sizing: border-box;
   }
+
+  .album {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .song-item:hover {

@@ -22,8 +22,8 @@ const likeSheetData: SongItem[] = [
     singer: '许嵩',
     album: '苏格拉没有底',
     time: '03.42',
-    url: 'https://music.163.com/song/media/outer/url?id=4940920.mp3',
-    img: 'http://p2.music.126.net/9bQAV8OXvGbMn9kMmmfErA==/109951164235631576.jpg?param=300y300'
+    url: 'https://m10.music.126.net/20220923105405/b8e276328efe39e80f9cb0ea9c35a63a/ymusic/60e3/2647/b973/4270e73673ce2dd6345444f1943953bf.mp3',
+    img: 'http://p2.music.126.net/9bQAV8OXvGbMn9kMmmfErA==/109951164235631576.jpg?param=300y300',
   }
 ]
 

@@ -4,5 +4,6 @@ export interface SongItem {
   album: string,
   time: string,
   url: string,
-  img: string
+  img: string,
+  lyric?: Array<any>
 }

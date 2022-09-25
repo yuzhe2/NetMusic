@@ -78,7 +78,7 @@ nextTick(() => {
   </div>
   <audio :src="song.url" ref="music"></audio>
   <Transition>
-    <Detail v-if="detailShow" @closeDetail="detailShow = false"></Detail>
+    <Detail v-if="detailShow" @closeDetail="detailShow = false" :state="playState" :process="processNum"></Detail>
   </Transition>
 </template>
 
@@ -104,6 +104,7 @@ nextTick(() => {
   padding: 10px 15px;
   border: 1px solid #000;
   background-color: rgba(62, 78, 153, .7);
+  z-index: 9999;
 
   .info {
     display: flex;

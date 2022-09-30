@@ -1,5 +1,8 @@
 export interface SheetItem {
   createTime: string,
   title: string,
-  id: number
+  id: number,
+  musicNum: number,
+  playNum: number,
+  brief?: string
 }

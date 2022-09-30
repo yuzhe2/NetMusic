@@ -6,6 +6,18 @@ import { useState } from '../../utils/store'
 const { userImg, username } = useState(['username', 'userImg'])
 
 const count = ref<number>(1)
+
+// 由于采用的是history模式,用来控制前进和后端的过程
+// 0 -> 前进; 1 -> 后退
+function handleHistoryView (number: number) {
+  if (number === 1) {
+    let flag = history.state.back
+    if (flag) history.back()
+  } else {
+    let flag = history.state.forward
+    if (flag) history.go()
+  }
+}
 </script>
 
 <template>
@@ -13,6 +25,10 @@ const count = ref<number>(1)
     <div class="logo">
       <i class="iconfont icon-yinle"></i>
       <span>网易云音乐</span>
+    </div>
+    <div class="view">
+      <i class="iconfont icon-houtui" @click="handleHistoryView(1)" title="后退"></i>
+      <i class="iconfont icon-qianjin" @click="handleHistoryView(0)" title="前进"></i>
     </div>
     <div class="search">
       <input type="text" class="input" />
@@ -46,8 +62,18 @@ const count = ref<number>(1)
   box-sizing: border-box;
   border: 1px solid #000;
 
+  .logo {
+    margin-right: 75px;
+  }
+
+  .view {
+    display: flex;
+    justify-content: space-between;
+    width: 40px;
+    padding: 0px 5px;
+  }
+
   .search {
-    margin-left: 40px;
 
     .input {
       border: 1px solid #333;

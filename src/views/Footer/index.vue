@@ -8,8 +8,8 @@ import Detail from '../Detail/index.vue'
 
 const song = useState(['song']).song as SongItem
 const music = ref<HTMLAudioElement>()
-const playState = ref<boolean>(false)
-const detailShow = ref<boolean>(false)
+let playState = ref<boolean>(false)
+let detailShow = ref<boolean>(false)
 const store = useStore()
 
 watch(song, () => {
@@ -78,7 +78,7 @@ nextTick(() => {
   </div>
   <audio :src="song.url" ref="music"></audio>
   <Transition>
-    <Detail v-if="detailShow" @closeDetail="detailShow = false" :state="playState" :process="processNum"></Detail>
+    <Detail v-show="detailShow" @closeDetail="detailShow = false" :state="playState" :process="processNum"></Detail>
   </Transition>
 </template>
 

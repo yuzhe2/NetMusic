@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { SheetItem } from '../../libs/aside'
 
 defineProps<{
@@ -8,8 +9,11 @@ defineProps<{
 
 let listShow = ref<boolean>(true)
 
+const router = useRouter()
+
 const emit = defineEmits(['changeSheet'])
-function handleChangeSheet (sheet: SheetItem | number) {
+function handleChangeSheet (sheet: SheetItem) {
+  router.push(`/main/${sheet.id}`)
   emit('changeSheet', sheet)
 }
 </script>
@@ -30,7 +34,6 @@ function handleChangeSheet (sheet: SheetItem | number) {
 
 <style scoped lang="scss">
 .aside {
-  float: left;
   width: 200px;
   padding: 10px;
   border: 1px solid #000;

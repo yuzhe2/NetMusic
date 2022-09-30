@@ -1,3 +1,4 @@
+import { SheetItem } from "../libs/aside"
 import { SongItem } from "../libs/song"
 
 const likeSheetData: SongItem[] = [
@@ -96,4 +97,33 @@ const musicData = [
   }
 ]
 
-export default musicData
+let sheetList: SheetItem[] = [
+  {
+    title: '我喜欢的音乐',
+    id: 9,
+    createTime: '2022-3-9 16:31:21',
+    musicNum: 1213,
+    playNum: 5219
+  },
+  {
+    title: '游戏用',
+    id: 7,
+    createTime: '2022-5-19 16:31:21',
+    musicNum: 6,
+    playNum: 1,
+    brief: ''
+  },
+  {
+    title: 'clannad',
+    id: 8,
+    createTime: '2022-3-13 14:12:31',
+    musicNum: 23,
+    playNum: 123,
+    brief: '汐是潮汐的意思，潮涨潮落。渚是海岸的意思。孩子大概就会像潮汐一样，总有一天会离开岸边（渚），在人生的道路上前行。然而不管她走多远，岸边（渚）会一直静静地等着，总有一天，在她累的时候，会回来，回到母亲（渚）的身边。'
+  }
+]
+
+export {
+  musicData,
+  sheetList
+}

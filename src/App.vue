@@ -7,26 +7,8 @@ import { SheetItem } from './libs/aside'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
-import musicData from './utils/data'
+import { musicData, sheetList } from './utils/data'
 import { SongItem } from './libs/song'
-
-let sheetList: SheetItem[] = [
-  {
-    title: '我喜欢的音乐',
-    id: 9,
-    createTime: '2022-3-9 16:31:21' 
-  },
-  {
-    title: '游戏用',
-    id: 7,
-    createTime: '2022-5-19 16:31:21'
-  },
-  {
-    title: 'clannad',
-    id: 8,
-    createTime: '2022-3-13 14:12:31'
-  }
-]
 
 const store = useStore()
 store.commit('switchSheet', musicData[0].data)
@@ -47,17 +29,25 @@ function handleChangeSheet (item: any) {
   <header>
     <Header></Header>
   </header>
-  <aside>
+  <div class="container">
+    <aside>
     <Aside @changeSheet="handleChangeSheet" :sheetList="sheetList"></Aside>
-  </aside>
-  <main>
-    <Main :sheet="curSheet" :musicData="curMusicData"></Main>
-  </main>
+    </aside>
+    <main class="main">
+      <router-view></router-view>
+    </main>
+  </div>
   <footer>
     <Footer></Footer>
   </footer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.container {
+  display: flex;
 
+  .main {
+    flex: 1;
+  }
+}
 </style>

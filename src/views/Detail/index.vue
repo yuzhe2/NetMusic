@@ -19,6 +19,7 @@ let timer: any = null
 
 // 监听播放状态的变化
 watch(() => props.state, (newVal) => {
+  console.log(22222)
   rotateImg(newVal)
 })
 

@@ -33,11 +33,15 @@ function handleChangeSheet (sheet: SheetItem) {
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .aside {
   width: 200px;
+  height: 100%;
   padding: 10px;
   border: 1px solid #000;
   box-sizing: border-box;
+  @include background_color("background_middle");
+  @include font_color("font_some");
   .title {
     padding-left: 10px;
     cursor: pointer;
@@ -56,7 +60,7 @@ function handleChangeSheet (sheet: SheetItem) {
       }
     }
     .item:hover {
-      background-color: rgba(51, 51, 51, 0.3);
+      background-color: rgba(102, 102, 102, 0.302);
     }
   }
 }

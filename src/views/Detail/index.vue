@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useState } from '../../utils/store'
 import { transformToNum } from '../../utils/date'
 import Commend from './child/commend.vue'
@@ -10,6 +10,10 @@ import { listenData, sheetData, lyric, commentData } from './data'
 const { song } = useState(['song'])
 let allTime = transformToNum(song.value.time)
 
+watch(() => song.value.time, (newVal) => {
+  allTime = transformToNum(newVal)
+})
+
 const props = defineProps<{
   state: boolean,
   process: number
@@ -19,7 +23,6 @@ let timer: any = null
 
 // 监听播放状态的变化
 watch(() => props.state, (newVal) => {
-  console.log(22222)
   rotateImg(newVal)
 })
 
@@ -38,6 +41,7 @@ watch(() => props.process, (newVal) => {
   activeIdx.value = index
 })
 
+// 用来更加灵活的滚动歌词
 let LyricTimer = null as any
 watch(activeIdx, (newVal) => {
   let num = (newVal - 1) * 40,
@@ -59,7 +63,7 @@ watch(activeIdx, (newVal) => {
 function rotateImg (flag: boolean) {
   if (flag) {
     timer = setInterval(() => {
-      imgTransform.value += 0.05
+      imgTransform.value += 0.02
     })
   } else {
     clearInterval(timer)
@@ -67,7 +71,6 @@ function rotateImg (flag: boolean) {
 }
 
 const emit = defineEmits(['closeDetail'])
-
 </script>
 
 <template>
@@ -132,7 +135,7 @@ const emit = defineEmits(['closeDetail'])
   top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 66px);
+  height: calc(100vh - 72px);
   padding-bottom: 30px;
   background-color: #333;
   color: #fff;

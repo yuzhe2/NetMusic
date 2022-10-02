@@ -42,8 +42,11 @@ function handleCancel () {
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .edit {
   padding: 20px;
+  @include background_color("background_middle");
+  height: calc(100vh - 123px);
 
   .header {
     font-size: 20px;
@@ -57,6 +60,8 @@ function handleCancel () {
       margin-bottom: 20px;
       .input {
         border: 1px solid #666;
+        padding: 4px;
+        background-color: transparent;
       }
     }
 

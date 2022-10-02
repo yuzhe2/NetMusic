@@ -83,6 +83,7 @@ nextTick(() => {
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .v-enter-active,
 .v-leave-active {
   transition: top 0.25s linear;
@@ -100,16 +101,16 @@ nextTick(() => {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  height: 44px;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border: 1px solid #000;
-  background-color: rgba(62, 78, 153, .7);
+  @include background_color("background_footer");
   z-index: 9999;
 
   .info {
     display: flex;
     align-items: center;
     width: 120px;
+    @include font_color("font_some");
     .img {
       width: 60px;
       border-radius: 4px;

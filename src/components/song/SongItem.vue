@@ -19,25 +19,32 @@ function switchMusic (song: SongItem) {
       <i class="iconfont icon-yinle like"></i>
       <i class="iconfont icon-yinle download"></i>
     </div>
-    <span class="title" style="width: 300px;">{{ song.title }}</span>
-    <span class="singer" style="width: 150px;">{{ song.singer }}</span>
-    <span class="album" style="width: 200px;">{{ song.album }}</span>
-    <span class="time" style="width: 100px;">{{ song.time }}</span>
+    <span class="title" style="width: 39%;">{{ song.title }}</span>
+    <span class="singer" style="width: 19%;">{{ song.singer }}</span>
+    <span class="album" style="width: 25%;">{{ song.album }}</span>
+    <span class="time" style="width: 9%;">{{ song.time }}</span>
   </div>
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .song-item {
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 8px 5px;
+  font-size: 14px;
   cursor: pointer;
+  color: #666;
 
   .operate {
     display: flex;
     justify-content: space-around;
     padding: 0px 4px;
     box-sizing: border-box;
+  }
+  
+  .title {
+    @include font_color("font_some");
   }
 
   .album {
@@ -48,6 +55,6 @@ function switchMusic (song: SongItem) {
 }
 
 .song-item:hover {
-  background-color: rgba($color: #333, $alpha: .3);
+  background-color: #6666664d !important;
 }
 </style>

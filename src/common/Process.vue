@@ -1,14 +1,22 @@
 <script setup lang="ts">
-let { time } =  defineProps<{
+import { watch } from 'vue';
+
+let prop =  defineProps<{
   color: string,
   time: string,
   width: string,
   process: number
 }>()
 
-let minute = parseInt(time.split('.')[0])
-let second = parseInt(time.split('.')[1])
+let minute = parseInt(prop.time.split('.')[0])
+let second = parseInt(prop.time.split('.')[1])
 let allTime = minute * 60 + second
+
+watch(() => prop.time, (newVal) => {
+  let minute = parseInt(newVal.split('.')[0])
+  let second = parseInt(newVal.split('.')[1])
+  allTime = minute * 60 + second
+})
 
 function getWidth (width: string, process: number) {
   return (parseInt(width) / 100) * process

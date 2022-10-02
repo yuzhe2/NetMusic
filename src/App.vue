@@ -45,6 +45,10 @@ function handleChangeSheet (item: any) {
 <style scoped lang="scss">
 .container {
   display: flex;
+  position: absolute;
+  top: 52px;
+  bottom: 72px;
+  width: 100%;
 
   .main {
     flex: 1;

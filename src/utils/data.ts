@@ -73,12 +73,12 @@ const gameSheetMusic: SongItem[] = [
     img: "https://p3.music.126.net/kRdEbe6fTsVDH-dMhcOHhw==/19171084741935656.jpg?param=300y300",
   },
   {
-    title: "奏",
+    title: "玫瑰花的葬礼",
     singer: "スキマスイッチ",
     album: "奏",
-    time: '5.11',
-    url: "https://music.163.com/song/media/outer/url?id=28409128.mp3",
-    img: "https://p3.music.126.net/PfxhEebDuQqQnuOKOJp4-A==/18428914393424537.jpg?param=300y300",
+    time: '4.20',
+    url: "https://music.163.com/song/media/outer/url?id=27646687.mp3",
+    img: "https://p3.music.126.net/2iwn7NnfNwtdyu1enlJw_w==/83562883723773.jpg?param=300y300",
   },
 ]
 

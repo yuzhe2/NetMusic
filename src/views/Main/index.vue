@@ -37,7 +37,7 @@ function handleAddBrief () {
   <div class="main">
     <div class="header">
       <div class="left">
-        <img :src="userImg" class="show" />
+        <img :src="musicList[0].img" class="show" />
       </div>
       <div class="right">
         <div class="name">
@@ -54,10 +54,12 @@ function handleAddBrief () {
         <div class="extra">
           <div class="num">
             <span class="music">
-              歌曲 : <span class="number">{{ sheet.musicNum }}</span>
+              <span class="prefix">歌曲 : </span>
+              <span class="number">{{ sheet.musicNum }}</span>
             </span>
             <span class="play">
-              播放 : <span class="number">{{ sheet.playNum }}</span>
+              <span class="prefix">播放 : </span>
+              <span class="number">{{ sheet.playNum }}</span>
             </span>
           </div>
           <div class="brief" v-if="Object.keys(sheet).includes('brief')">
@@ -71,16 +73,17 @@ function handleAddBrief () {
     <div class="container">
       <div class="header">
         <span class="operate" style="width: 44px;">操作</span>
-        <span class="title" style="width: 300px;">标题</span>
-        <span class="title" style="width: 150px;">歌手</span>
-        <span class="album" style="width: 200px;">专辑</span>
-        <span class="time" style="width: 100px;">时间</span>
+        <span class="title" style="width: 40.2%">标题</span>
+        <span class="title" style="width: 19.5%;">歌手</span>
+        <span class="album" style="width: 26%">专辑</span>
+        <span class="time" style="width: 9%;">时间</span>
       </div>
       <div class="list">
         <SongItemCom
           :song="item"
           :key="index"
           v-for="(item, index) of musicList"
+          :style="index % 2 ? {} : { 'background': '#9999994d' }"
         >
           <template v-slot:prefix>
             <span style="width: 40px;">{{ index }}</span>
@@ -92,18 +95,29 @@ function handleAddBrief () {
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .main {
   border: 1px solid #000;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  @include background_color("background_middle");
 
   .header {
     display: flex;
     padding-left: 51px;
     padding: 20px 0px 0px 15px;
     box-sizing: border-box;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
 
     .left {
       margin-right: 20px;
       flex: 0 0 150px;
+      .show{
+        border-radius: 5px;
+      }
     }
 
     .right {
@@ -113,20 +127,20 @@ function handleAddBrief () {
         margin-top: 10px;
         .user {
           display: flex;
-          width: 90px;
           align-items: center;
           justify-content: space-between;
           margin-right: 10px;
           font-size: 12px;
-          color: #076161;
+          color: #23a9f2;
           .img {
             width: 20px;
             border-radius: 50%;
+            margin-right: 8px;
           }
         }
         .time {
           font-size: 12px;
-          color: #333;
+          color: #666;
         }
       }
       .name {
@@ -140,10 +154,23 @@ function handleAddBrief () {
           padding: 0px 4px;
           margin-right: 8px;
         }
+        .title {
+          font-size: 20px;
+          font-weight: bold;
+          @include font_color("font_some")
+        }
       }
 
       .extra {
         font-size: 14px;
+
+        .prefix {
+          @include font_color("font_some")
+        }
+
+        .music {
+          margin-right: 15px;
+        }
 
         .num {
           margin: 10px 0px;

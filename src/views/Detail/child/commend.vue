@@ -15,6 +15,7 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .commend {
   display: flex;
   align-items: center;
@@ -35,7 +36,8 @@ defineProps<{
 
   .text-wrap {
     font-size: 12px;
-    color: #fff;
+    color: #000;
+    @include font_color("detail_color");
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -43,6 +45,7 @@ defineProps<{
 }
 
 .commend:hover {
-  background-color: rgba($color: #666, $alpha: .7);
+  background-color: rgba($color: #eaebec, $alpha: .7);
+  @include background_color("detail_scroll");
 }
 </style>

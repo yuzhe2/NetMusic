@@ -67,7 +67,6 @@ function handleHistoryView (number: number) {
   height: 52px;
   padding: 10px 20px;
   box-sizing: border-box;
-  border: 1px solid #000;
   @include background_color("background_header");
 
   .logo {
@@ -100,7 +99,7 @@ function handleHistoryView (number: number) {
     right: 180px;
     display: flex;
     align-items: center;
-    color: #a6a7a8;
+    color: #fff;
     font-size: 12px;
 
     .user-img {
@@ -113,13 +112,18 @@ function handleHistoryView (number: number) {
     }
   }
 
+  .func {
+    position: absolute;
+    right: 312px;
+  }
+
   .size {
     position: absolute;
     right: 20px;
     display: flex;
     justify-content: space-between;
     width: 80px;
-    color: #a6a7a8;
+    color: #fff;
   }
 }
 </style>

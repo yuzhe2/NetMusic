@@ -41,3 +41,9 @@
     border-color: themed($color) !important;
   }
 }
+
+@mixin background_image($color) {
+  @include themeify {
+    background-image: themed($color) !important;
+  }
+}

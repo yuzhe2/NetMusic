@@ -89,7 +89,7 @@ const emit = defineEmits(['closeDetail'])
           <li class="item"
             v-for="(item, index) of lyric"
             :key="index"
-            :style="activeIdx === index ? { color: '#fff' } : {}"
+            :class="activeIdx === index ? 'active' : ''"
           >
             <span class="text">{{ item.content }}</span>
           </li>
@@ -130,6 +130,7 @@ const emit = defineEmits(['closeDetail'])
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .detail {
   position: fixed;
   top: 0;
@@ -137,8 +138,10 @@ const emit = defineEmits(['closeDetail'])
   width: 100vw;
   height: calc(100vh - 72px);
   padding-bottom: 30px;
-  background-color: #333;
-  color: #fff;
+  background-image: linear-gradient(to bottom, #DBDEE4, #fff 13%);
+  color: #000;
+  @include background_image("detail_img");
+  @include font_color("detail_color");
   overflow: auto;
   box-sizing: border-box;
 
@@ -186,23 +189,28 @@ const emit = defineEmits(['closeDetail'])
           height: 40px;
           color: #666;
         }
+
+        .item.active {
+          color: #000;
+          @include font_color("font_some");
+        }
       }
 
     }
 
     .lyric::-webkit-scrollbar {
-      width: 8px;
-      background-color: #333;
+      width: 6px;
+      background-color: transparent;
     }
 
     .lyric::-webkit-scrollbar-thumb {
       background-color: transparent;
-      border: 2px solid #333;
       border-radius: 10px;
     }
 
     .lyric:hover::-webkit-scrollbar-thumb {
-      background-color: rgba(102, 102, 102, .7);
+      background-color: #eaeae9;
+      @include background_color("detail_scroll");
     }
 
     .img-wrap {
@@ -218,26 +226,23 @@ const emit = defineEmits(['closeDetail'])
     .recommend {
       width: 270px;
       height: 200px;
+      padding-right: 2px;
       overflow: auto;
     }
 
     .recommend::-webkit-scrollbar {
-      width: 8px;
-      background-color: #333;
+      width: 6px;
+      background-color: transparent;
     }
 
     .recommend::-webkit-scrollbar-thumb {
       background-color: transparent;
-      border: 2px solid #333;
       border-radius: 10px;
     }
 
     .recommend:hover::-webkit-scrollbar-thumb {
-      background-color: rgba(102, 102, 102, .7);
-    }
-
-    .recommend::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(102, 102, 102, 1);
+      background-color: #eaeae9;
+      @include background_color("detail_scroll");
     }
 
   }

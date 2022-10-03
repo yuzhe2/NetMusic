@@ -2,7 +2,6 @@
 import { watch } from 'vue';
 
 let prop =  defineProps<{
-  color: string,
   time: string,
   width: string,
   process: number
@@ -35,7 +34,7 @@ function getCurTime (process: number) {
     <span class="cur-time">{{ getCurTime(process) }}</span>
     <div class="process" :style="{ 'width': width }">
       <div class="bar"></div>
-      <div class="cur" :style="{ 'background-color': color, width: `${getWidth(width, process)}px` }"></div>
+      <div class="cur" :style="{ width: `${getWidth(width, process)}px` }"></div>
       <div class="dot" :style="{ 'transform': `translateX(${getWidth(width, process)}px)` }"></div>
     </div>
     <span class="all-time">{{ time }}</span>
@@ -43,6 +42,7 @@ function getCurTime (process: number) {
 </template>
 
 <style scoped lang="scss">
+@import '/@assets/scss/_handle.scss';
 .process-wrap {
   display: flex;
   justify-content: space-between;
@@ -68,6 +68,7 @@ function getCurTime (process: number) {
       top: 0px;
       height: 100%;
       transition: all .3s ease;
+      @include background_color("color_hover");
     }
 
     .dot {
@@ -76,7 +77,7 @@ function getCurTime (process: number) {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: #f00;
+      @include background_color("color_hover");
       transition: all .3s ease;
       z-index: 900;
     }

@@ -61,17 +61,23 @@ nextTick(() => {
     </div>
     <div class="middle">
       <div class="control">
-        <span class="prev player-btn" title="上一首" @click="handleFunc('prev')"></span>
+        <span class="prev player-btn" title="上一首" @click="handleFunc('prev')">
+          <i class="iconfont icon-shangyishou"></i>
+        </span>
         <span
           class="play player-btn"
-          :class="playState ? 'playing' : ''"
           title="播放"
           @click="playMusic"
-        ></span>
-        <span class="next player-btn" title="下一首" @click="handleFunc('next')"></span>
+        >
+          <i class="iconfont icon-bofang" v-if="!playState"></i>
+          <i class="iconfont icon-zanting" v-else></i>
+        </span>
+        <span class="next player-btn" title="下一首" @click="handleFunc('next')">
+          <i class="iconfont icon-xiayishou"></i>
+        </span>
       </div>
       <div class="process">
-        <Process width="400px" :time="song.time" color="#f00" :process="processNum"></Process>
+        <Process width="400px" :time="song.time" :process="processNum"></Process>
       </div>
     </div>
     <div class="func"></div>
@@ -101,8 +107,11 @@ nextTick(() => {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  padding: 5px 15px;
-  border: 1px solid #000;
+  padding: 6px 15px;
+  border-top: 1px solid;
+  border-color: #e0e0e0;
+  @include border_color("border_aside");
+  box-sizing: border-box;
   @include background_color("background_footer");
   z-index: 9999;
 
@@ -142,29 +151,21 @@ nextTick(() => {
       margin-bottom: 4px;
       .player-btn {
         display: inline-block;
-        background-image: url(../../assets/img/player.png);
-      }
-
-      .player-btn.playing {
-        background-position: -30px 0;
-      }
-
-      .prev {
-        background-position: 0 -30px;
         width: 19px;
-        height: 20px;
+        height: 19px;
+        
+        .iconfont {
+          font-size: 24px;
+          color: #2e2e2e;
+          @include font_color("color_play");
+        }
+
+        .icon-shangyishou:hover,
+        .icon-xiayishou:hover {
+          @include font_color("color_hover");
+        }
       }
 
-      .play {
-        width: 19px;
-        height: 29px;
-      }
-
-      .next {
-        background-position: 0 -52px;
-        width: 19px;
-        height: 20px;
-      }
     }
     .process {
       width: 480px;

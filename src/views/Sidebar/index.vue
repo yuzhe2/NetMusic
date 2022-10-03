@@ -38,8 +38,10 @@ function handleChangeSheet (sheet: SheetItem) {
   width: 200px;
   height: 100%;
   padding: 10px;
-  border: 1px solid #000;
+  border-right: 1px solid;
   box-sizing: border-box;
+  border-color: #e0e0e0;
+  @include border_color("border_aside");
   @include background_color("background_middle");
   @include font_color("font_some");
   .title {

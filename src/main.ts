@@ -5,6 +5,7 @@ import './style.css'
 import './assets/font/iconfont.css'
 import App from './App.vue'
 
-document.documentElement.setAttribute('data-theme', 'pink')
+let theme = localStorage.getItem('theme') || 'dark'
+document.documentElement.setAttribute('data-theme', theme)
 
 createApp(App).use(store).use(router).mount('#app')

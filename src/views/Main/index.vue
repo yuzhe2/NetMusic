@@ -97,7 +97,6 @@ function handleAddBrief () {
 <style scoped lang="scss">
 @import '/@assets/scss/_handle.scss';
 .main {
-  border: 1px solid #000;
   height: 100%;
   box-sizing: border-box;
   overflow: auto;
@@ -157,6 +156,7 @@ function handleAddBrief () {
         .title {
           font-size: 20px;
           font-weight: bold;
+          color: #373737;
           @include font_color("font_some")
         }
       }

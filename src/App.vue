@@ -3,25 +3,21 @@ import Header from './views/Header/index.vue'
 import Aside from './views/Sidebar/index.vue'
 import Main from './views/Main/index.vue'
 import Footer from './views/Footer/index.vue'
-import { SheetItem } from './libs/aside'
-import { ref } from 'vue'
+
 import { useStore } from 'vuex'
 
-import { musicData, sheetList } from './utils/data'
+import { SheetItem } from './libs/aside'
 import { SongItem } from './libs/song'
 
-const store = useStore()
-store.commit('switchSheet', musicData[0].data)
+import { useState } from './utils/store'
 
-let curSheet = ref<SheetItem>(sheetList[0]),
-    curMusicData = ref<SongItem[]>(musicData[0].data)
+const { sheetList } = useState(['sheetList'])
+
+const store = useStore()
+
+// 切换当前播放的歌单(用于切歌,切歌是在当前播放的歌单中切换的)
 function handleChangeSheet (item: any) {
-  curSheet.value = item
-  let id = curSheet.value.id,
-    curData = musicData.find(val => val.id === id)
-    
-  curMusicData.value = curData?.data as any
-  store.commit('switchSheet', curData?.data)
+
 }
 </script>
 

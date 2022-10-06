@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { useState } from '../../utils/store'
 import Theme from '../../common/Theme.vue'
+import Sign from '../../components/sign/Sign.vue'
+import { ref } from 'vue';
 
-const { userImg, username } = useState(['username', 'userImg'])
+const { userImg, username, isLogin } = useState(['username', 'userImg', 'isLogin'])
 
-const count = ref<number>(1)
+const signPop = ref<boolean>(false)
 
 // 由于采用的是history模式,用来控制前进和后退的过程
 // 0 -> 前进; 1 -> 后退
@@ -35,10 +35,16 @@ function handleHistoryView (number: number) {
       <input type="text" class="input" />
     </div>
     <div class="user">
-      <span class="user-img">
-        <img :src="userImg" alt="" class="img" />
-      </span>
-      <span class="user-name">{{ username }}</span>
+      <template v-if="isLogin">
+        <span class="user-img">
+          <img :src="userImg" alt="" class="img" />
+        </span>
+        <span class="user-name">{{ username }}</span>
+      </template>
+      <template v-else>
+        <span class="tips" @click="signPop = true">未登录</span>
+        <Sign v-if="signPop" @closeSign="signPop = false"></Sign>
+      </template>
     </div>
     <div class="func">
       <Theme></Theme>
@@ -101,6 +107,7 @@ function handleHistoryView (number: number) {
     align-items: center;
     color: #fff;
     font-size: 12px;
+    cursor: pointer;
 
     .user-img {
       display: inline-block;

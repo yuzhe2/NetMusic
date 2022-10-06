@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import { SongItem } from '../../libs/song'
-import { useStore } from 'vuex'
 
 defineProps<{
   song: SongItem
 }>()
-
-const store = useStore()
-function switchMusic (song: SongItem) {
-  store.commit('switchSong', song)
-}
 </script>
 
 <template>
-  <div class="song-item" @dblclick="switchMusic(song)">
+  <div class="song-item">
     <slot name="prefix"></slot>
     <div class="operate" style="width: 50px;">
       <i class="iconfont icon-yinle like"></i>

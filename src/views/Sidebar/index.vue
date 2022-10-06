@@ -16,10 +16,17 @@ function handleChangeSheet (sheet: SheetItem) {
   router.push(`/main/${sheet.id}`)
   emit('changeSheet', sheet)
 }
+
+function goHome () {
+  router.push({
+    name: 'home'
+  })
+}
 </script>
 
 <template>
   <div class="aside">
+    <div class="find" @click="goHome">发现音乐</div>
     <div class="header">
       <span class="title" @click="listShow = !listShow">创建的歌单</span>
     </div>
@@ -44,6 +51,14 @@ function handleChangeSheet (sheet: SheetItem) {
   @include border_color("border_aside");
   @include background_color("background_middle");
   @include font_color("font_some");
+  .find {
+    padding: 8px 10px;
+    height: 20px;
+    line-height: 20px;
+  }
+  .find:hover {
+    background-color: rgba(102, 102, 102, 0.302);
+  }
   .title {
     padding-left: 10px;
     cursor: pointer;

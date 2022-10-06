@@ -1,28 +1,46 @@
 <script setup lang="ts">
 import SongItemCom from '../../components/song/SongItem.vue'
+
 import { SheetItem } from '../../libs/aside'
 import { SongItem  } from '../../libs/song'
 import { useState } from '../../utils/store'
-import { useRoute, useRouter } from 'vue-router'
-import { musicData, sheetList } from '../../utils/data'
-import { ref, watch } from 'vue'
+import instance from '../../network/index'
 
-const emit = defineEmits(['editBrief'])
+import { useRoute, useRouter } from 'vue-router'
+import { ref, watch } from 'vue'
+import { useStore } from 'vuex'
+
 const route = useRoute()
 const router = useRouter()
+const store = useStore()
 
-const { username, userImg } = useState(['username', 'userImg'])
+const { username, userImg, sheetList } = useState(['username', 'userImg', 'sheetList'])
+
+let sheet = ref<SheetItem | any>({})
+let musicList = ref<SongItem[]>([])
 
 // 监听路由参数的变化进行重新的渲染,因为用了动态路由所以会缓存
-let id: number = parseInt(route.params.id as string)
-let sheet = ref(sheetList.find(val => val.id === id) as SheetItem)
-let musicList = ref(musicData.find(val => val.id === id)?.data as SongItem[])
-watch(() => route.params, (newParams) => {
+function getInfo () {
   let id: number = parseInt(route.params.id as string)
-  sheet.value = sheetList.find(val => val.id === id) as SheetItem
-  musicList.value = musicData.find(val => val.id === id)?.data as SongItem[]
-})
+  sheet.value = sheetList.value.find((val: any) => val.id === id)
+  instance.get(`/songs?id=${id}`).then(res => {
+    musicList.value = res.data.songList
+  })
+}
 
+getInfo()
+
+watch(() => route.params, getInfo)
+
+function switchMusic (song: SongItem) {
+  store.commit('switchSong', song)
+  store.commit('switchSheet', musicList.value)
+}
+
+console.log(store.state)
+
+
+// 跳转到编辑简历页面
 function handleAddBrief () {
   router.push({
     path: '/edit',
@@ -37,7 +55,7 @@ function handleAddBrief () {
   <div class="main">
     <div class="header">
       <div class="left">
-        <img :src="musicList[0].img" class="show" />
+        <img :src="musicList[0] ? musicList[0].img : ''" class="show" />
       </div>
       <div class="right">
         <div class="name">
@@ -84,6 +102,7 @@ function handleAddBrief () {
           :key="index"
           v-for="(item, index) of musicList"
           :style="index % 2 ? {} : { 'background': '#9999994d' }"
+          @dblclick.native="switchMusic(item  )"
         >
           <template v-slot:prefix>
             <span style="width: 40px;">{{ index }}</span>

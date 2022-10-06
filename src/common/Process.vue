@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 
-let prop =  defineProps<{
+let prop = defineProps<{
   time: string,
   width: string,
   process: number
